@@ -20,6 +20,15 @@ Projeto de mestrado em visão computacional:
 - análise da frequência modal extraída de vídeos
 - pipeline com processamento de sinais, extração de features e modelagem preditiva
 
+## Projeto em destaque: Inferência de Estresse Hídrico por Frequência Natural
+
+No projeto **Marajó**, investigo como inferir estresse hídrico em açaizeiros usando vídeo RGB comum (inclusive captura por celular), explorando a dinâmica vibracional da planta.
+
+- Repositório: [github.com/ygarasab/marajo](https://github.com/ygarasab/marajo)
+- Ideia técnica: extrair frequências naturais/modais a partir do vídeo e analisar sinais no domínio do tempo e da frequência
+- Pipeline: pré-processamento de frames, PCA, separação de fontes (CP) e análise modal/espectral
+- Objetivo: criar um fluxo acessível para apoio ao monitoramento agrícola com base em evidências quantitativas
+
 ## Stack principal
 
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)

@@ -63,6 +63,18 @@
         <h2>{{ t.projectsTitle }}</h2>
         <div class="project-grid">
           <article class="project">
+            <h3>{{ t.projectMarajoTitle }}</h3>
+            <p>{{ t.projectMarajo }}</p>
+            <a
+              class="project-link"
+              href="https://github.com/ygarasab/marajo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ t.projectMarajoLink }}
+            </a>
+          </article>
+          <article class="project">
             <h3>Computer Vision Research</h3>
             <p>{{ t.project1 }}</p>
           </article>
@@ -116,6 +128,9 @@ export default {
           focusItem2: 'Sinal: frequência modal e variações ao longo do tempo',
           focusItem3: 'Saída: classificação e suporte à decisão para monitoramento',
           projectsTitle: 'Projetos atuais',
+          projectMarajoTitle: 'Inferência de Estresse Hídrico por Frequência Natural',
+          projectMarajo: 'Projeto de pesquisa no Marajó para inferir estresse hídrico em açaizeiros via vídeo RGB, com extração de dinâmica vibracional, análise espectral e pipeline com PCA + CP.',
+          projectMarajoLink: 'Ver repositório do Marajó',
           project1: 'Experimentos para detecção de estresse hídrico com base em dinâmica modal de plantas.',
           project2: 'Aplicações e APIs com foco em clareza, arquitetura e evolução contínua.',
           project3: 'Fluxos de dados, validação de features e ciclos de treino para problemas aplicados.',
@@ -142,6 +157,9 @@ export default {
           focusItem2: 'Signal: modal frequency and temporal variations',
           focusItem3: 'Output: classification and decision support for monitoring',
           projectsTitle: 'Current projects',
+          projectMarajoTitle: 'Water Stress Inference via Natural Frequency',
+          projectMarajo: "Research project in Marajo to infer water stress in acai palms from regular RGB video, using vibrational dynamics extraction, spectral analysis, and a PCA + CP pipeline.",
+          projectMarajoLink: 'View Marajo repository',
           project1: 'Experiments for water stress detection based on plant modal dynamics.',
           project2: 'Applications and APIs focused on clarity, architecture, and continuous evolution.',
           project3: 'Data flows, feature validation, and training cycles for applied problems.',
@@ -333,6 +351,20 @@ export default {
 .project h3 {
   margin-bottom: 0.45rem;
   color: #00ffff;
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #00ff88;
+  text-decoration: none;
+  border: 1px solid rgba(0, 255, 136, 0.55);
+  border-radius: 8px;
+  padding: 0.35rem 0.55rem;
+}
+
+.project-link:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.35);
 }
 
 .footer {
