@@ -1,4 +1,4 @@
-# Ygarasab
+# Eduardo Cardoso | Ygarasab
 
 Desenvolvedor com atuação em backend, frontend e dados, focado em construir software útil e projetos aplicados em visão computacional.
 
