@@ -1,10 +1,10 @@
 <template>
   <div class="construction-message">
     <p class="construction-text">
-      &gt; CONSTRUINDO...
+      &gt; YGARASAB
     </p>
     <p class="construction-subtext">
-      Portfólio em desenvolvimento. Retorne em breve para atualizações.
+      PHP, Laravel, React, Vue, Python e Machine Learning aplicados a projetos reais.
     </p>
   </div>
 </template>

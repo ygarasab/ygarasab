@@ -1,193 +1,367 @@
 <template>
-  <div class="container" @mousemove="handleMouseMove" @click="handleClick">
-    <!-- Cursor personalizado -->
-    <div 
-      class="cursor" 
-      :style="{ left: cursorX + 'px', top: cursorY + 'px' }"
-    ></div>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">YGARASAB</div>
+      <div class="topbar-right">
+        <nav class="menu">
+          <a href="#about">{{ t.navAbout }}</a>
+          <a href="#focus">{{ t.navFocus }}</a>
+          <a href="#projects">{{ t.navProjects }}</a>
+          <a href="#contact">{{ t.navContact }}</a>
+        </nav>
+        <button class="lang-switch" @click="toggleLocale">
+          {{ locale === 'pt' ? 'PT | EN' : 'EN | PT' }}
+        </button>
+      </div>
+    </header>
 
-    <!-- Mensagem de construção -->
-    <ConstructionMessage />
+    <main class="layout">
+      <section class="hero card">
+        <p class="tag">Software Engineer + Applied AI</p>
+        <h1>{{ t.heroTitle }}</h1>
+        <p class="subtitle">
+          {{ t.heroSubtitle1 }}
+          {{ t.heroSubtitle2 }}
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#focus">{{ t.heroCta }}</a>
+          <a class="btn btn-ghost" href="https://github.com/ygarasab" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </section>
 
-    <!-- Foto circular -->
-    <PhotoSection :photo-rotation="photoRotation" />
+      <section id="about" class="card">
+        <h2>{{ t.aboutTitle }}</h2>
+        <p>
+          {{ t.aboutTextBefore }} <strong>PHP e Laravel</strong> {{ t.aboutTextMiddle1 }}
+          <strong>React e Vue</strong> {{ t.aboutTextMiddle2 }}
+          <strong>Python</strong> {{ t.aboutTextAfter }}
+        </p>
+        <div class="chips">
+          <span>PHP</span>
+          <span>Laravel</span>
+          <span>React</span>
+          <span>Vue</span>
+          <span>Python</span>
+          <span>Machine Learning</span>
+        </div>
+      </section>
 
-    <!-- Links -->
-    <LinksSection />
+      <section id="focus" class="card spotlight">
+        <h2>{{ t.focusTitle }}</h2>
+        <p class="spotlight-title">{{ t.focusHeadline }}</p>
+        <p>
+          {{ t.focusDescription }}
+        </p>
+        <ul>
+          <li>{{ t.focusItem1 }}</li>
+          <li>{{ t.focusItem2 }}</li>
+          <li>{{ t.focusItem3 }}</li>
+        </ul>
+      </section>
 
-    <!-- Botão About -->
-    <button 
-      class="personal-btn"
-      @click="openAboutPage"
-      @mouseenter="buttonHover = true"
-      @mouseleave="buttonHover = false"
-    >
-      [ABOUT]
-    </button>
+      <section id="projects" class="card">
+        <h2>{{ t.projectsTitle }}</h2>
+        <div class="project-grid">
+          <article class="project">
+            <h3>Computer Vision Research</h3>
+            <p>{{ t.project1 }}</p>
+          </article>
+          <article class="project">
+            <h3>Web Systems</h3>
+            <p>{{ t.project2 }}</p>
+          </article>
+          <article class="project">
+            <h3>Data + ML Pipelines</h3>
+            <p>{{ t.project3 }}</p>
+          </article>
+        </div>
+      </section>
+    </main>
 
-    <!-- Página About -->
-    <AboutPage 
-      :is-open="showAboutPage" 
-      :full-text="fullText"
-      @close="closeAboutPage"
-    />
-
-    <!-- Elementos decorativos -->
-    <FloatingElements />
-    <CodeLines />
-
-    <!-- Partículas de click -->
-    <ParticleEffect ref="particleEffectRef" />
-
-    <!-- Rodapé -->
-    <FooterComponent />
+    <footer id="contact" class="footer">
+      <p>{{ t.footerText }}</p>
+      <div class="footer-links">
+        <a href="https://www.ygarasab.com" target="_blank" rel="noopener noreferrer">Website</a>
+        <a href="https://github.com/ygarasab" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import ConstructionMessage from './components/ConstructionMessage.vue'
-import PhotoSection from './components/PhotoSection.vue'
-import LinksSection from './components/LinksSection.vue'
-import AboutPage from './components/AboutPage.vue'
-import FloatingElements from './components/FloatingElements.vue'
-import CodeLines from './components/CodeLines.vue'
-import ParticleEffect from './components/ParticleEffect.vue'
-import FooterComponent from './components/FooterComponent.vue'
-
 export default {
   name: 'App',
-  components: {
-    ConstructionMessage,
-    PhotoSection,
-    LinksSection,
-    AboutPage,
-    FloatingElements,
-    CodeLines,
-    ParticleEffect,
-    FooterComponent
-  },
-  setup() {
-    const cursorX = ref(0)
-    const cursorY = ref(0)
-    const photoRotation = ref(0)
-    const buttonHover = ref(false)
-    const showAboutPage = ref(false)
-    const particleEffectRef = ref(null)
-    
-    const fullText = `Oi! Desculpa a bagunça, que é a primeira vez que eu preciso fazer um... 
-        Não, não é a primeira vez que eu preciso fazer, é a primeira vez que eu me empenho em fazer um portfólio. 
-        É um desafio, eu acho, porque as minhas atividades são muito mais de back, muito mais com ciência de dados. 
-        Eu não tenho certeza de como traduzir isso para um portfólio. Visualmente, eu acho que os meus amigos front-end conseguem demonstrar muito mais aqui. 
-        Não que eu não saiba front-end, mas é que não é tanto o meu foco, por mais que aqui possa parecer. 
-        E tem outra coisa, depois que a gente é contratado, para que serve o portfólio? Eu deixo ele em pé? Eu não sei, eu tenho esse domínio aqui. 
-        Eu estou pensando em, talvez, depois mudar ele para ser algum tipo de coisa útil para mim no dia-a-dia, tipo... Ah, remove o fundo, codifica isso aqui, 
-        decodifica isso aqui, renderiza esse HTML, sabe, esse tipo de coisa que dá para usar no dia-a-dia? 
-        Eu não tenho que ficar dependendo dos sites terceiros, não sei. 
-        Mas eu não sei o que fazer sobre esse portfólio aqui não, cara. 
-        Eu acho que eu vou adicionar alguns gráficos, talvez alguma coisa mais interativa para demonstrar minha proeza de dados. Não tenho certeza. 
-        Essa foto também, eu não gosto muito dessa foto. Eu botei ela porque ela é mais recente, ela é de frente. Eu não tenho tantas fotos minhas mais recentes. 
-        Eu tenho algumas fotos que eu uso no LinkedIn, que são de uma viagem de 2023, mas eu não sei se é uma boa deixar aqui. Talvez eu deixe, não sei. 
-        Meu currículo também tá complicado. Não sei se alguém clicou para abrir meu currículo. 
-        Talvez eu tenha atualizado já, mas a V1 do meu currículo ainda não está... ideal. 
-        Talvez eu precise fazer algo melhor, talvez adicionar algum estilo, não está tão bem construído. 
-        Mas isso vem uma ansiedade de entrar logo no pipe e começar a ver que tipo de vagas a gente tem por aí. E partir para essa nova jornada. 
-        Não sei ainda que tipo de trabalho eu estou procurando. Mas eu queria uma empresa bem estruturada, eu queria ter algum lugar com uma boa liderança. 
-        Todas as empresas que eu trabalhei até agora eu meio que tive que ser exército de um homem só, ou a pessoa que sabe o que tem que ser feito e tal. 
-        E isso dificulta muito a evolução, eu acho que isso... Não ter essa visão do topo, de uma boa referência, sabe? 
-        Eu acho que isso, não sei se me desmotiva, mas me tira o foco, ou não me dá foco, sei lá. 
-        Então seria legal uma empresa talvez mais estabilizada eu ter essa visão desse cara, essa referência. Enfim. Bora lá.`
-
-    const handleMouseMove = (e) => {
-      cursorX.value = e.clientX
-      cursorY.value = e.clientY
-      
-      // Efeito parallax na foto
-      const centerX = window.innerWidth / 2
-      const centerY = window.innerHeight / 2
-      const deltaX = (e.clientX - centerX) / 50
-      
-      photoRotation.value = deltaX * 0.5
-    }
-
-    const handleClick = (e) => {
-      if (particleEffectRef.value) {
-        particleEffectRef.value.createParticles(e)
+  data() {
+    return {
+      locale: 'pt',
+      messages: {
+        pt: {
+          navAbout: 'Sobre',
+          navFocus: 'Foco',
+          navProjects: 'Projetos',
+          navContact: 'Contato',
+          heroTitle: 'Construindo software com direção e pesquisa aplicada.',
+          heroSubtitle1: 'Backend, frontend e dados conectados em produtos reais.',
+          heroSubtitle2: 'Hoje, foco em visão computacional para agricultura.',
+          heroCta: 'Ver foco atual',
+          aboutTitle: 'Experiência abrangente',
+          aboutTextBefore: 'Atuo com',
+          aboutTextMiddle1: 'em APIs e regras de negócio,',
+          aboutTextMiddle2: 'para interfaces web, e',
+          aboutTextAfter: 'para automações, dados e machine learning.',
+          focusTitle: 'Projeto de mestrado',
+          focusHeadline: 'Identificação de estresse hídrico em plantas via vídeo',
+          focusDescription: 'Pipeline em desenvolvimento com extração de frequência modal, processamento de sinais, engenharia de atributos e modelagem preditiva para detectar sinais de estresse.',
+          focusItem1: 'Entrada: vídeos de plantas em diferentes condições hídricas',
+          focusItem2: 'Sinal: frequência modal e variações ao longo do tempo',
+          focusItem3: 'Saída: classificação e suporte à decisão para monitoramento',
+          projectsTitle: 'Projetos atuais',
+          project1: 'Experimentos para detecção de estresse hídrico com base em dinâmica modal de plantas.',
+          project2: 'Aplicações e APIs com foco em clareza, arquitetura e evolução contínua.',
+          project3: 'Fluxos de dados, validação de features e ciclos de treino para problemas aplicados.',
+          footerText: 'Vamos construir algo útil.'
+        },
+        en: {
+          navAbout: 'About',
+          navFocus: 'Focus',
+          navProjects: 'Projects',
+          navContact: 'Contact',
+          heroTitle: 'Building software with direction and applied research.',
+          heroSubtitle1: 'Backend, frontend, and data connected in real products.',
+          heroSubtitle2: 'Right now, my focus is computer vision for agriculture.',
+          heroCta: 'See current focus',
+          aboutTitle: 'Broad experience',
+          aboutTextBefore: 'I work with',
+          aboutTextMiddle1: 'on APIs and business rules,',
+          aboutTextMiddle2: 'for web interfaces, and',
+          aboutTextAfter: 'for automation, data, and machine learning.',
+          focusTitle: "Master's project",
+          focusHeadline: 'Water stress identification in plants through video',
+          focusDescription: 'An evolving pipeline with modal frequency extraction, signal processing, feature engineering, and predictive modeling to detect stress signals.',
+          focusItem1: 'Input: plant videos under different water conditions',
+          focusItem2: 'Signal: modal frequency and temporal variations',
+          focusItem3: 'Output: classification and decision support for monitoring',
+          projectsTitle: 'Current projects',
+          project1: 'Experiments for water stress detection based on plant modal dynamics.',
+          project2: 'Applications and APIs focused on clarity, architecture, and continuous evolution.',
+          project3: 'Data flows, feature validation, and training cycles for applied problems.',
+          footerText: "Let's build something useful."
+        }
       }
     }
-
-    const openAboutPage = () => {
-      showAboutPage.value = true
+  },
+  computed: {
+    t() {
+      return this.messages[this.locale]
     }
-
-    const closeAboutPage = () => {
-      showAboutPage.value = false
-    }
-
-    return {
-      cursorX,
-      cursorY,
-      photoRotation,
-      buttonHover,
-      showAboutPage,
-      fullText,
-      particleEffectRef,
-      handleMouseMove,
-      handleClick,
-      openAboutPage,
-      closeAboutPage
+  },
+  methods: {
+    toggleLocale() {
+      this.locale = this.locale === 'pt' ? 'en' : 'pt'
     }
   }
 }
 </script>
 
 <style scoped>
-.container {
+.page {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  padding: 1.5rem;
   position: relative;
   z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #00ffff;
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease;
-  z-index: 9999;
-  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.personal-btn {
-  margin-top: 1.5rem;
-  padding: 0.75rem 2rem;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 2px solid #00ff88;
-  border-radius: 8px;
-  color: #00ff88;
-  font-weight: 600;
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.brand {
   font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
-  letter-spacing: 1px;
-  font-family: 'Courier New', monospace;
+  letter-spacing: 0.2rem;
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
 }
 
-.personal-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  background: rgba(0, 0, 0, 0.7);
-  box-shadow: 0 0 25px #00ff88, 0 0 50px rgba(0, 255, 136, 0.5);
-  border-color: #00ffff;
+.menu {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.menu a {
   color: #00ffff;
+  text-decoration: none;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  transition: 0.2s ease;
+}
+
+.menu a:hover {
+  border-color: #00ff88;
+  color: #00ff88;
+}
+
+.lang-switch {
+  border: 1px solid rgba(0, 255, 136, 0.7);
+  color: #00ff88;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.lang-switch:hover {
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.35);
+}
+
+.layout {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.card {
+  background: rgba(8, 12, 20, 0.66);
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  border-radius: 14px;
+  padding: 1.3rem;
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.06);
+}
+
+.hero h1 {
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  color: #e5ffff;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.tag {
+  color: #00ff88;
+  letter-spacing: 0.08rem;
+}
+
+.subtitle {
+  max-width: 70ch;
+}
+
+.hero-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+}
+
+.btn-primary {
+  border-color: #00ff88;
+  color: #00ff88;
+}
+
+.btn-primary:hover,
+.btn-ghost:hover {
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.3);
+}
+
+.chips {
+  margin-top: 0.9rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.chips span {
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.85rem;
+}
+
+.spotlight {
+  border-color: rgba(0, 255, 136, 0.45);
+}
+
+.spotlight-title {
+  color: #00ff88;
+  margin-bottom: 0.6rem;
+}
+
+.spotlight ul {
+  margin-top: 0.8rem;
+  padding-left: 1rem;
+}
+
+.spotlight li {
+  margin: 0.35rem 0;
+}
+
+.project-grid {
+  margin-top: 0.8rem;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.project {
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 0.9rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.project h3 {
+  margin-bottom: 0.45rem;
+  color: #00ffff;
+}
+
+.footer {
+  margin: 1.2rem 0 0.5rem;
+  padding: 0.8rem 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.footer a {
+  color: #00ffff;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 </style>

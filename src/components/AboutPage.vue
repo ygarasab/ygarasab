@@ -8,7 +8,7 @@
             <span class="terminal-btn minimize"></span>
             <span class="terminal-btn maximize"></span>
           </div>
-          <span class="terminal-title">about.txt</span>
+          <span class="terminal-title">current_focus.txt</span>
         </div>
         <div class="terminal-body" ref="terminalBodyRef">
           <div class="terminal-content">
